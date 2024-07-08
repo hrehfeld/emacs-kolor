@@ -53,6 +53,7 @@
 
 (cl-defstruct kolor "A color" representation value)
 
+;; convert from/to emacs
 (defun make-kolor-from-emacs (color)
   "Convert a color retrieved from emacs (or the `color' library) into a new `KOLOR' with representation `rgb' and value `COLOR'."
   (let ((representation
@@ -181,6 +182,7 @@ One of `kolor-base-representations'."
         (nth 1 value)
         (nth 2 value)))
 
+;; component wise access
 
 (defun kolor-component (representation icomponent color &optional copy?)
   "Return the `ICOMPONENT'-th component of `COLOR' in `REPRESENTATION'."
@@ -192,6 +194,7 @@ One of `kolor-base-representations'."
     (setf (kolor-value color)
           (-replace-at icomponent x (kolor-value color)))
     color))
+;; (kolor-set-component 'rgb 0 color 128)
 
 (defun kolor--component-named-representation (component-name)
   "Return the representation of the component named `COMPONENT-NAME'."
