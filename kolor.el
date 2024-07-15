@@ -337,11 +337,6 @@ Return a copy if representations need to be converted or `COPY?' is non-nil."
 ;; (kolor-clamp-component-named 'hue 101)
 ;; (kolor-clamp-component-named 'hue-normalized 1.1)
 
-(defun kolor-map-component (target-representation fn icomponent color)
-  "Apply `FN' to the `ICOMPONENT'-th component of `COLOR' converted to `TARGET-REPRESENTATION'."
-  (let* ((color (kolor-ensure-representation target-representation color))
-         (value (kolor-value )))))
-
 (defun kolor-map (target-representation fn color)
   "Convert `COLOR' to `TARGET-REPRESENTATION' and apply `FN' to it.
 
