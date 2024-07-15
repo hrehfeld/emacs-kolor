@@ -86,6 +86,10 @@
       color
     (kolor-from-emacs color)))
 
+(defun kolor-is-emacs? (color)
+  "Return non-nil if `COLOR' is a color."
+  (and (stringp color)
+       (color-defined-p color)))
 
 ;; (kolor-to-emacs (make-kolor :representation 'rgb-normalized :value '(1 0 0)))
 ;; (kolor-to-emacs (make-kolor :representation 'rgb :value '(255 0 0)))
