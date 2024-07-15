@@ -501,6 +501,36 @@ Do not use this function for non-color attributes."
 ;; (kolor-set-face-attribute 'default nil :foreground (make-kolor :representation 'rgb :value '(255 0 0)))
 
 
+(defun kolor-make-face-light-dark (face)
+  "Modify `FACE' to create a light and a dark variant where one is the lightness-inverted equivalent of the other."
+  (let ((previous-spec (face-all-attributes face))
+        last-keyword
+        spec
+        dark-spec
+        light-spec)
+    ;;(message "previous-spec: %S" previous-spec)
+    (cl-loop for (attribute . value) in previous-spec
+             do
+             (when (kolor-is-emacs? value)
+               (let* ((value (kolor-ensure-representation 'hsl-normalized (kolor-from-emacs value)))
+                      (background-attribute? (eq attribute :background))
+                      (is-light? (> (kolor-component-named 'lightness-normalized value) 0.5))
+                      (is-light? (if background-attribute? (not is-light?) is-light?))
+
+                      (opposite (kolor-set-component-named-multiply-centered 'lightness-normalized value -1.0))
+                      (light (if is-light? value opposite))
+                      (dark (if is-light? opposite value)))
+                 (push attribute light-spec)
+                 (push light light-spec)
+                 (push attribute dark-spec)
+                 (push dark dark-spec))))
+    (let* ((spec `(;;(default . ,previous-spec)
+                   (((background dark)) . ,(kolor-to-emacs-face-spec (nreverse dark-spec)))
+                   (t ,(kolor-to-emacs-face-spec (nreverse light-spec))))))
+      ;;(message "spec: %S" spec)
+      (face-spec-set face nil 'reset)
+      (face-spec-set face spec 'face-defface-spec))))
+
                                         ;test
 (provide 'kolor)
 ;;; kolor.el ends here
