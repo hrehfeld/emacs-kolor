@@ -114,10 +114,10 @@
              (to-transform (intern (format "kolor--chroma-to-%s" to-representation))))
         (unless (fboundp transform)
           (error "No transformation from %s to %s (trying %s)" from-representation to-representation transform))
-
-        (let* ((from-value (funcall from-transform (kolor-value color)))
-               (transformed-value (funcall transform from-value))
-               (to-value (funcall to-transform transformed-value)))
+        (let ((to-value (-some->> (kolor-value color)
+                          (funcall from-transform)
+                          (funcall transform)
+                          (funcall to-transform))))
           (make-kolor :representation to-representation :value to-value))))))
 
 ;; (kolor-ensure-representation 'rgb (make-kolor :representation 'rgb :value '(255 128 64)))
