@@ -399,7 +399,7 @@ Return a copy if representations need to be converted or `COPY?' is non-nil."
 
 (defun kolor--funcall-centered (fn range x)
   "Call `FN' with `X''s offset against the midpoint of `RANGE'."
-  (let* ((midpoint (/ (+ (nth 0 range) (nth 1 range)) 2))
+  (let* ((midpoint (/ (+ (nth 0 range) (nth 1 range)) 2.0))
          (centered-x (- x midpoint)))
     (+ midpoint (funcall fn centered-x)))
   )
