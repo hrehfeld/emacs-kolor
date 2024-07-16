@@ -404,6 +404,9 @@ Return a copy if representations need to be converted or `COPY?' is non-nil."
     (+ midpoint (funcall fn centered-x)))
   )
 
+;; (kolor--funcall-centered (lambda (x) (* x 2)) '(0 255) 128)
+;; (kolor--funcall-centered (lambda (x) (* x -1)) '(0 1) 0.5)
+
 (defun kolor-transform-component-centered (representation icomponent fn color &optional copy?)
   "Apply `FN' to the `ICOMPONENT'-th component of `COLOR' in `REPRESENTATION', centered around the midpoint of the valid range.
 
