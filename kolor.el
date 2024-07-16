@@ -131,6 +131,9 @@
 ;; (kolor-ensure-representation 'rgb (make-kolor :representation 'name :value "red"))
 ;; (kolor-ensure-representation 'rgb-normalized (make-kolor :representation 'name :value "red"))
 ;; (kolor-ensure-representation 'hsl (make-kolor :representation 'rgb :value '(255 126 0)))
+;; (kolor-ensure-representation 'rgb-string (make-kolor :representation 'hsl-normalized :value '(1.0 1.0 0.9)))
+
+
 
 (defalias 'kolor--chroma-rgb-to-hsl 'chroma-rgb-to-hsl)
 (defalias 'kolor--chroma-hsl-to-rgb 'chroma-hsl-to-rgb)
