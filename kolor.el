@@ -30,7 +30,7 @@
                                                     (hsl . ,kolor-hsl-component-names)
                                                     (rgb-normalized . ,kolor-rgb-normalized-component-names)
                                                     (hsl-normalized . ,kolor-hsl-normalized-component-names)))
-(defconst kolor-hsl-hue-max 100)
+(defconst kolor-hsl-hue-max 359)
 (defconst kolor-component-ranges `((red 0 255) (green 0 255) (blue 0 255)
                                    (red-normalized 0.0 1.0) (green-normalized 0.0 1.0) (blue-normalized 0.0 1.0)
                                    (hue 0 ,kolor-hsl-hue-max) (saturation 0 1.0) (lightness 0 1.0)
