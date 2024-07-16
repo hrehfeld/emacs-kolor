@@ -34,8 +34,7 @@
 (defconst kolor-component-ranges `((red 0 255) (green 0 255) (blue 0 255)
                                    (red-normalized 0.0 1.0) (green-normalized 0.0 1.0) (blue-normalized 0.0 1.0)
                                    (hue 0 ,kolor-hsl-hue-max) (saturation 0 1.0) (lightness 0 1.0)
-                                   (hue-normalized 0.0 1.0) (saturation-normalized 0.0 1.0) (lightness-normalized 0.0 1.0)
-                                   representation   ))
+                                   (hue-normalized 0.0 1.0) (saturation-normalized 0.0 1.0) (lightness-normalized 0.0 1.0)))
 (defun kolor-component-range (representation icomponent)
   "Return the valid range for the `ICOMPONENT'-th component of `COLOR' in `REPRESENTATION'."
   (cdr (nth icomponent (cdr (assoc representation kolor-component-ranges-by-representation)))))
