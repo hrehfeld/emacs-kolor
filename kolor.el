@@ -118,6 +118,7 @@
                           (funcall from-transform)
                           (funcall transform)
                           (funcall to-transform))))
+          (cl-assert to-value t "Transform: (%S %S %S)" from-transform transform to-transform)
           (make-kolor :representation to-representation :value to-value))))))
 
 ;; (kolor-ensure-representation 'rgb (make-kolor :representation 'rgb :value '(255 128 64)))
