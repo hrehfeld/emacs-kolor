@@ -163,7 +163,7 @@ One of `kolor-base-representations'."
 
 (defun kolor--chroma-from-rgb-normalized (value)
   "Convert `VALUE' from `rgb-normalized' [0.0 1.0] to `rgb' [0 255]."
-  (mapcar (lambda (x) (* x 255.0))
+  (mapcar (lambda (x) (truncate (* x 255.0)))
           value))
 
 (defun kolor--chroma-from-hsl-normalized (value)
