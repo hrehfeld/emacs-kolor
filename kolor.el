@@ -493,8 +493,9 @@ Do not use this function for non-color attributes, it will return nil."
        ;; just return keywords like :background
        arg
      ;; convert colors to emacs format
-     (cl-check-type arg kolor)
-     (kolor-to-emacs arg))))
+     (if (kolor-p arg)
+         (kolor-to-emacs arg)
+       arg))))
 
 ;; (kolor-to-emacs-face-spec (list :foreground (make-kolor :representation 'rgb :value '(255 0 0)) :background (make-kolor :representation 'rgb :value '(0 255 0))))
 
