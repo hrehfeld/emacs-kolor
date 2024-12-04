@@ -680,6 +680,19 @@ Return a copy if representations need to be converted or `COPY?' is non-nil."
 
 ;; (kolor-set-component-named-multiply-centered 'red-normalized (make-kolor :representation 'rgb-normalized :value '(1 0 0 )) 0.5)
 
+
+(defun kolor-contrasted-component-named (component-name color contrast-multiplier &optional copy?)
+  "Multiply the component named `COMPONENT-NAME' of `COLOR' by `CONTRAST-MULTIPLIER'.
+
+Return a copy if representations need to be converted or `COPY?' is non-nil."
+  (cl-check-type component-name symbol)
+  (cl-assert (assoc component-name kolor-component-names #'eq) t)
+  (cl-check-type contrast-multiplier number)
+  (kolor-transform-component-named-centered component-name
+                                            (lambda (component) (* component contrast-multiplier))
+                                            color
+                                            copy?))
+
 ;; face helper functions
 
 (defun kolor-face-attribute (face attribute &optional frame inherit)
@@ -774,5 +787,18 @@ Do not use this function for non-color attributes."
            (kolor-make-face-light-dark face 'lightness)))
 
                                         ;test
+
+
+(defun kolor-contrasted (component-name contrast-multiplier &optional face attribute)
+  "Retrieve the color of `FACE' `ATTRIBUTE' and return a contrasted version with COMPONENT-NAME multiplied by `CONTRAST-MULTIPLIER'.
+
+If `FACE' and `ATTRIBUTE' are nil, use the `default' face and its `:background'."
+(let ((old-color (kolor-face-attribute 'default :background)))
+  (cl-check-type old-color kolor)
+  (kolor-contrasted-component-named
+    component-name
+    old-color contrast-multiplier)))
+
+
 (provide 'kolor)
 ;;; kolor.el ends here
