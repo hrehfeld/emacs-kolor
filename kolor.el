@@ -683,12 +683,13 @@ Return a copy if representations need to be converted or `COPY?' is non-nil."
 ;; face helper functions
 
 (defun kolor-face-attribute (face attribute &optional frame inherit)
-  "Return the value of `ATTRIBUTE' for `FACE', converted to a `KOLOR'.
+  "Return the value of `ATTRIBUTE' for `FACE'.
 
-Do not use this function for non-color attributes, it will return nil."
+Colors will be converted to a `KOLOR', others returned as is."
   (let ((value (face-attribute face attribute frame inherit)))
-    (when (kolor-is-emacs? value)
-      (kolor-from-emacs value))))
+    (if (kolor-is-emacs? value)
+        (kolor-from-emacs value)
+      value)))
 
 ;; (kolor-face-attribute 'default :foreground)
 ;; (kolor-face-attribute 'default :background)
